@@ -2,6 +2,7 @@ package hipravin.javapuzzles;
 
 import android.os.Bundle;
 import android.text.Spanned;
+import android.webkit.WebView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
@@ -22,16 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment puzzleListFragment = PuzzleListFragment.newInstance("", "");
         Fragment puzzleFragment = PuzzleFragment.newInstance("", "");
-        String text = "";
-        try (InputStream is = getResources().openRawResource(R.raw.puzzlecode1);
-             Scanner scanner = new Scanner(is, StandardCharsets.UTF_8.name())) {
-             text = scanner.useDelimiter("\\A").next();
 
-
-
-        } catch (IOException e) {
-//            throw new RuntimeException(e);
-        }
 
         getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.flFragment, puzzleListFragment)
@@ -39,14 +31,12 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         ViewModelProvider.Factory factory = new ViewModelProvider.AndroidViewModelFactory(getApplication());
-        String codeText = text;
         PuzzleListViewModel model = new ViewModelProvider(getViewModelStore(), factory).get(PuzzleListViewModel.class);
         model.getPuzzles().observe(this, puzzleDescriptions -> {
 
-            Spanned spanned = HtmlCompat.fromHtml(codeText, HtmlCompat.FROM_HTML_MODE_COMPACT);
 
-            TextView textView = (TextView) findViewById(R.id.puzzleCodeTextView);
-            textView.setText(spanned);
+//            WebView codeWebView = (WebView)findViewById(R.id.puzzleCodeWebView);
+//            codeWebView.loadData(codeText, "text/html", null);
 //            TextView textView = (TextView)findViewById(R.id.txt1);
 //
 //            String descrs = puzzleDescriptions.stream()

@@ -4,6 +4,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -58,5 +60,29 @@ public class PuzzleFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_puzzle, container, false);
     }
 
+    @Override
+    public void onViewCreated( View view,  Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        loadCode(view, savedInstanceState);
+
+
+    }
+
+    private void loadCode( View view,  Bundle savedInstanceState) {
+        try (InputStream is = getResources().openRawResource(R.raw.puzzlecode1);
+             Scanner scanner = new Scanner(is, StandardCharsets.UTF_8.name())) {
+            String text = scanner.useDelimiter("\\A").next();
+
+
+            Spanned spanned = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT);
+
+            TextView textView = view.findViewById(R.id.puzzleCodeTextView);
+            textView.setText(spanned);
+
+
+        } catch (IOException e) {
+//            throw new RuntimeException(e);
+        }
+    }
 }
