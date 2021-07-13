@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import hipravin.javapuzzles.markup.CodeMarkupUtil;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -55,13 +56,12 @@ public class PuzzleFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_puzzle, container, false);
     }
 
     @Override
-    public void onViewCreated( View view,  Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         loadCode(view, savedInstanceState);
@@ -69,13 +69,14 @@ public class PuzzleFragment extends Fragment {
 
     }
 
-    private void loadCode( View view,  Bundle savedInstanceState) {
+    private void loadCode(View view, Bundle savedInstanceState) {
         try (InputStream is = getResources().openRawResource(R.raw.puzzlecode1);
              Scanner scanner = new Scanner(is, StandardCharsets.UTF_8.name())) {
             String text = scanner.useDelimiter("\\A").next();
 
+            String processed = CodeMarkupUtil.plainToHtml(text);
 
-            Spanned spanned = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT);
+            Spanned spanned = HtmlCompat.fromHtml(processed, HtmlCompat.FROM_HTML_MODE_COMPACT);
 
             TextView textView = view.findViewById(R.id.puzzleCodeTextView);
             textView.setText(spanned);
