@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Fragment puzzleListFragment = PuzzleListFragment.newInstance("", "");
-        Fragment puzzleFragment = PuzzleFragment.newInstance("", "");
+        Fragment puzzleFragment = PuzzleFragment.newInstance("1");
 
 
         getSupportFragmentManager().beginTransaction()

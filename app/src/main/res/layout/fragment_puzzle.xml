@@ -23,12 +23,14 @@
                     android:layout_weight="1"/>
 
 
-            <TextView android:layout_width="0dp"
+            <TextView
+                      android:id="@+id/puzzleTitle"
+                      android:layout_width="0dp"
                       android:layout_height="match_parent"
                       android:layout_weight="3"
                       android:gravity="center_vertical|start"
                       android:textSize="20sp"
-                      android:text="1. Boolean"
+                      android:text="1."
                       android:layout_gravity="start"/>
             <ImageButton
                     android:src="@android:drawable/ic_menu_view"
@@ -53,10 +55,15 @@
 
         </LinearLayout>
         <View style="@style/Divider"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/puzzleHeader"
+                    android:layout_width="0dp" android:layout_height="wrap_content"
                       android:layout_weight="4"
-                      android:padding="8dp"
+                      android:paddingTop="@dimen/divider_padding"
+                      android:paddingBottom="@dimen/divider_padding"
                       android:text="Подберите входные параметры программы так, чтобы условие condition было верно"
                       android:layout_gravity="start"/>
 
@@ -66,7 +73,9 @@
 
         <TextView
                 android:id="@+id/puzzleCodeTextView"
-                android:text="TextView"
+                android:paddingTop="@dimen/divider_padding"
+                android:text="Code"
+                android:textSize="12sp"
                 android:fontFamily="monospace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +84,7 @@
         />
         <TextView
                 android:id="@+id/puzzleConsoleTextView"
-                android:text="> console output"
+                android:text=">"
                 android:textColor="@color/white"
                 android:background="@color/black"
                 android:layout_width="match_parent"

@@ -19,9 +19,12 @@ public abstract class CodeMarkupUtil {
     private static final String STRING_LITERAL_COLOR = "#FFF0F0";
 
     static {
+//        replacers.put("<", "&lt;");
+//        replacers.put(">", "&gt;");
+//        replacers.put("&", "&amp;");
         replacers.put("\r\n", "<br/>");
         replacers.put("\n", "<br/>");
-        replacers.put("\t", "&nbsp;");
+        replacers.put("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
         replacers.put("  ", "&nbsp;&nbsp;");
 
         //keywords
@@ -50,6 +53,11 @@ public abstract class CodeMarkupUtil {
     public static String plainToHtml(String plain) {
         String result = plain;
 
+        //whitespaces and escape-chars
+        for (Map.Entry<String, String> replacement : replacers.entrySet()) {
+            result = result.replaceAll(replacement.getKey(), replacement.getValue());
+        }
+
         //double-quoted string
         result = result.replaceAll("(\".*?\")", "<span style=\"background-color: "+ STRING_LITERAL_COLOR +"\">$1</span>");
 
@@ -62,10 +70,7 @@ public abstract class CodeMarkupUtil {
         //start uppercase words
         result = result.replaceAll("([\\W&&[^#]])(\\p{Upper}\\w+)", "$1<strong><span style=\"color: "+ UPPERCASE_WORD_COLOR +"\">$2</span></strong>");
 
-        //whitespaces
-        for (Map.Entry<String, String> replacement : replacers.entrySet()) {
-            result = result.replaceAll(replacement.getKey(), replacement.getValue());
-        }
+
         //keywords
         Set<String> wordsFound = findWords(plain);
         for (String word : wordsFound) {
