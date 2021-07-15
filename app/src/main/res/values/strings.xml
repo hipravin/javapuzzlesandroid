@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Java Puzzles</string>
     <string name="runCodeButton">Run</string>
-    <string name="commonTaskDescription">Program should work and "passed" variable should be true at the end.</string>
+    <string name="commonTaskDescription">Code execution should finish without exception and variable named \"passed\" should be true.</string>
 
-    <string name="puzzle1title">1 - Long R shift</string>
-    <string name="puzzle1prompt">Operations &gt;&gt; and &gt;&gt;&gt; have different semantics.</string>
+    <string name="puzzle1title">1. Bit shift</string>
+    <string name="puzzle1prompt">Bit operations &gt;&gt; and &gt;&gt;&gt; have different semantics.</string>
+    <string name="consoleInputHint">Console input</string>
 
 </resources>

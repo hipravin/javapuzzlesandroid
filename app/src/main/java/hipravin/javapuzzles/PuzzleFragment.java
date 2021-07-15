@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.google.android.material.textfield.TextInputEditText;
 import hipravin.javapuzzles.markup.CodeMarkupUtil;
 import hipravin.javapuzzles.puzzles.PuzzleInput;
 import hipravin.javapuzzles.puzzles.PuzzleInvocationResult;
@@ -77,8 +78,10 @@ public class PuzzleFragment extends Fragment {
             setPuzzleViewText(view);
             assignOnRunButton(view);
         }
-
-
+        ImageButton backButton = view.findViewById(R.id.buttonPuzzleBack);
+        backButton.setOnClickListener(v -> {
+            requireActivity().onBackPressed();
+        });
     }
 
     private void loadCode(View view, Bundle savedInstanceState) {
@@ -109,10 +112,13 @@ public class PuzzleFragment extends Fragment {
     private void assignOnRunButton(View view) {
         ImageButton runButton = view.findViewById(R.id.runPuzzleButton);
         TextView consoleTextView = view.findViewById(R.id.puzzleConsoleTextView);
-        TextView consoleInput = view.findViewById(R.id.puzzleTextInput1);
-
+//        TextView consoleInput = view.findViewById(R.id.puzzleTextInput1);
+        TextInputEditText consoleInput = view.findViewById(R.id.puzzleTextInput1);
         runButton.setOnClickListener(v -> {
-            PuzzleInput puzzleInput = new PuzzleInput(consoleInput.getText().toString());
+            PuzzleInput puzzleInput = new PuzzleInput(
+                    consoleInput.getText() != null
+                            ? consoleInput.getText().toString()
+                            : "");
             PuzzleInvocationResult puzzleInvocationResult = puzzleTask.run(puzzleInput);
 
             consoleTextView.setText("");

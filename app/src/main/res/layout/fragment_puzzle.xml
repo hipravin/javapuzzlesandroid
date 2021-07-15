@@ -12,16 +12,18 @@
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/divider_padding"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout">
-            <Button
-                    android:text="&lt;"
-                    android:textSize="20sp"
+            <ImageButton
+                    android:id="@+id/buttonPuzzleBack"
+                    android:src="@drawable/baseline_arrow_back_black_24dp"
+                    android:background="@color/white"
                     android:layout_width="0dp"
                     android:layout_gravity="start"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
-
 
             <TextView
                       android:id="@+id/puzzleTitle"
@@ -29,29 +31,35 @@
                       android:layout_height="match_parent"
                       android:layout_weight="3"
                       android:gravity="center_vertical|start"
-                      android:textSize="20sp"
+                      android:textSize="18sp"
+                      android:paddingLeft="4dp"
                       android:text="1."
                       android:layout_gravity="start"/>
             <ImageButton
-                    android:src="@android:drawable/ic_menu_view"
+                    android:id="@+id/buttonEnableDebug"
+                    android:src="@drawable/baseline_bug_report_black_24dp"
+                    android:layout_width="0dp"
+                    android:layout_gravity="end"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            <ImageButton
+                    android:id="@+id/buttonPuzzleHelp"
+                    android:src="@drawable/baseline_help_outline_black_24dp"
+                    android:layout_width="0dp"
+                    android:background="@color/white"
+                    android:layout_gravity="end"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            <ImageButton
+                    android:id="@+id/buttonSeeSolution"
+                    android:src="@drawable/baseline_developer_board_black_24dp"
+                    android:background="@color/white"
                     android:layout_width="0dp"
                     android:layout_gravity="end"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
 
-            <ImageButton
-                    android:src="@android:drawable/ic_menu_help"
-                    android:layout_width="0dp"
-                    android:layout_gravity="end"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-
-            <ImageButton
-                    android:src="@android:drawable/ic_menu_preferences"
-                    android:layout_width="0dp"
-                    android:layout_gravity="end"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
 
         </LinearLayout>
         <View style="@style/Divider"/>
@@ -96,27 +104,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <EditText
-                    android:id="@+id/puzzleTextInput1"
-                    android:layout_height="wrap_content"
+<!--            <EditText-->
+<!--                    android:id="@+id/puzzleTextInput1"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_weight="2"-->
+<!--                    android:autofillHints="false"-->
+<!--                    android:inputType="text"-->
+<!--                    android:hint="Type answer here"-->
+<!--            />-->
+            <com.google.android.material.textfield.TextInputLayout
+
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:autofillHints="false"
-                    android:inputType="text"
-                    android:hint="Type answer here"
-            />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:hint="@string/consoleInputHint">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/puzzleTextInput1"
+                        android:background="@color/white"
+                        android:autofillHints="false"
+                        android:importantForAutofill="no"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
             <ImageButton
                     android:id="@+id/runPuzzleButton"
-
-                    android:src="@android:drawable/ic_media_play"
-
-
+                    android:src="@drawable/baseline_play_circle_outline_black_48dp"
                     android:layout_width="0dp"
 
-                    android:layout_gravity="end"
+                    android:background="@color/white"
+                    android:layout_gravity="center_vertical|end"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
-
 
         </LinearLayout>
 
