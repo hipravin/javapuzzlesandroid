@@ -1,18 +1,16 @@
 package hipravin.javapuzzles;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.text.Spanned;
-import android.webkit.WebView;
-import android.widget.TextView;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.text.HtmlCompat;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.flFragment, puzzleListFragment)
-                .replace(R.id.flFragment, puzzleFragment)
+                .replace(R.id.flFragment, puzzleListFragment)
+//                .replace(R.id.flFragment, puzzleFragment)
                 .commit();
 
         ViewModelProvider.Factory factory = new ViewModelProvider.AndroidViewModelFactory(getApplication());
-        PuzzleListViewModel model = new ViewModelProvider(getViewModelStore(), factory).get(PuzzleListViewModel.class);
+        PuzzleViewModel model = new ViewModelProvider(getViewModelStore(), factory).get(PuzzleViewModel.class);
         model.getPuzzles().observe(this, puzzleDescriptions -> {
 
 
@@ -46,7 +44,34 @@ public class MainActivity extends AppCompatActivity {
 //            textView.setText(descrs);
             // update UI
         });
+
+
     }
 
+    private void switchToPuzzleFragment(String puzzleId) {
+        Fragment puzzleFragment = PuzzleFragment.newInstance(puzzleId);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flFragment, puzzleFragment)
+                .commit();
+
+
+    }
+
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        View view = super.onCreateView(name, context, attrs);
+
+        if(view == null) {
+            return view;
+        }
+
+        CardView puzzle1card = view.findViewById(R.id.puzzleCard1);
+        puzzle1card.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+//            switchToPuzzleFragment("1");
+        });
+
+        return view;
+    }
 }

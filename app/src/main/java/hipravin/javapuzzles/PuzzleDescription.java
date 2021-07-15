@@ -1,17 +1,27 @@
 package hipravin.javapuzzles;
 
 public class PuzzleDescription {
-    private String header;
+    private String puzzleId;
+    private int titleStringId;
 
-    public PuzzleDescription(String header) {
-        this.header = header;
+    public PuzzleDescription(String puzzleId, int headerStringId) {
+        this.puzzleId = puzzleId;
+        this.titleStringId = headerStringId;
     }
 
-    public String getHeader() {
-        return header;
+    public String getPuzzleId() {
+        return puzzleId;
     }
 
-    public void setHeader(String header) {
-        this.header = header;
+    public void setPuzzleId(String puzzleId) {
+        this.puzzleId = puzzleId;
+    }
+
+    public int getTitleStringId() {
+        return titleStringId;
+    }
+
+    public void setTitleStringId(int titleStringId) {
+        this.titleStringId = titleStringId;
     }
 }

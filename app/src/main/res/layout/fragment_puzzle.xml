@@ -64,7 +64,7 @@
                       android:layout_weight="4"
                       android:paddingTop="@dimen/divider_padding"
                       android:paddingBottom="@dimen/divider_padding"
-                      android:text="Подберите входные параметры программы так, чтобы условие condition было верно"
+                      android:text=""
                       android:layout_gravity="start"/>
 
 
