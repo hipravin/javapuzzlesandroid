@@ -33,16 +33,6 @@ public abstract class PuzzleTaskAbstract implements PuzzleTask {
         return codeRawId;
     }
 
-    @Override
-    public int promptStringId() {
-        return prompStringId;
-    }
-
-    @Override
-    public int solutionRawId() {
-        return solutionRawId;
-    }
-
     protected abstract PuzzleInvocationResult runInternal(PuzzleInput puzzleInput, List<String> outputAccumulator);
 
     @Override
