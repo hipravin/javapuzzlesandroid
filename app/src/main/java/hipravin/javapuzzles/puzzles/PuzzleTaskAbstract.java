@@ -49,6 +49,7 @@ public abstract class PuzzleTaskAbstract implements PuzzleTask {
     public PuzzleInvocationResult run(PuzzleInput puzzleInput) {
         List<String> output = new ArrayList<>();
         try {
+            output.add(puzzleInput.getInput());
             PuzzleInvocationResult pir = runInternal(puzzleInput, output);
             if(pir.passed) {
                 output.add("passed");

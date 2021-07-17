@@ -1,7 +1,6 @@
 package hipravin.javapuzzles;
 
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -9,6 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
+import hipravin.javapuzzles.puzzles.PuzzleTask;
+import hipravin.javapuzzles.puzzles.PuzzleTaskRepository;
+import hipravin.javapuzzles.viewmodel.PuzzleViewModel;
 
 
 public class PuzzleListFragment extends Fragment {
@@ -55,7 +58,6 @@ public class PuzzleListFragment extends Fragment {
 
         CardView puzzle1card = view.findViewById(R.id.puzzleCard1);
         puzzle1card.setOnClickListener(v -> {
-//            Toast.makeText(view.getContext().getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
             switchToPuzzleFragment("1");
         });
     }
@@ -68,6 +70,14 @@ public class PuzzleListFragment extends Fragment {
                     .replace(R.id.flFragment, puzzleFragment)
                     .addToBackStack(null)
                     .commit();
+
+            ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory
+                    .getInstance(requireActivity().getApplication());
+            PuzzleViewModel model = new ViewModelProvider(requireActivity().getViewModelStore(), factory).get(PuzzleViewModel.class);
+
+            PuzzleTask puzzleTask = new PuzzleTaskRepository().getForId(puzzleId);
+
+            model.setViewStatePuzzle(puzzleId, puzzleTask);
 
         }
     }

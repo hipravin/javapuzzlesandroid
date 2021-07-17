@@ -10,7 +10,7 @@ import java.util.List;
 public class Puzzle1LongShift extends PuzzleTaskAbstract {
     public Puzzle1LongShift() {
         super(R.string.puzzle1title, R.string.commonTaskDescription,
-                R.raw.puzzlecode1, 0, 0);
+                R.raw.puzzlecode1, R.string.puzzle1prompt, 0);
     }
 
     @Override

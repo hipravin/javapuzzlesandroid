@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.text.Spanned;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +58,7 @@ public class PuzzleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             puzzleId = getArguments().getString(ARG_PUZZLE_ID);
-            puzzleTask = new PuzzleTaskRepository().getForId(Integer.parseInt(puzzleId));
+            puzzleTask = new PuzzleTaskRepository().getForId(puzzleId);
         }
     }
 
@@ -77,11 +79,8 @@ public class PuzzleFragment extends Fragment {
             loadCode(view, savedInstanceState);
             setPuzzleViewText(view);
             assignOnRunButton(view);
+//            assignHelpButton(view);
         }
-        ImageButton backButton = view.findViewById(R.id.buttonPuzzleBack);
-        backButton.setOnClickListener(v -> {
-            requireActivity().onBackPressed();
-        });
     }
 
     private void loadCode(View view, Bundle savedInstanceState) {
@@ -103,11 +102,18 @@ public class PuzzleFragment extends Fragment {
     }
 
     private void setPuzzleViewText(View view) {
-        TextView title = view.findViewById(R.id.puzzleTitle);
-        title.setText(getResources().getString(puzzleTask.titleStringId()));
         TextView header = view.findViewById(R.id.puzzleHeader);
         header.setText(getResources().getString(puzzleTask.headerStringId()));
     }
+
+//    private void assignHelpButton(View view) {
+//        ImageButton help = view.findViewById(R.id.buttonPuzzleHelp);
+//
+//        help.setOnClickListener(v -> {
+//            DialogFragment dialog = new PuzzleHelpDialogFragment(puzzleTask.promptStringId());
+//            dialog.show(getFragmentManager(), "PuzzleHelpDialogTag");
+//        });
+//    }
 
     private void assignOnRunButton(View view) {
         ImageButton runButton = view.findViewById(R.id.runPuzzleButton);
@@ -120,6 +126,7 @@ public class PuzzleFragment extends Fragment {
                             ? consoleInput.getText().toString()
                             : "");
             PuzzleInvocationResult puzzleInvocationResult = puzzleTask.run(puzzleInput);
+            Toast.makeText(getContext(),puzzleInvocationResult.isPassed() ? "passed" : "failed",Toast.LENGTH_SHORT).show();
 
             consoleTextView.setText("");
             String consoleOut = puzzleInvocationResult.getOutput().stream()

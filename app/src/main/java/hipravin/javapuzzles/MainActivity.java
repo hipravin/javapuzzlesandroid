@@ -1,77 +1,77 @@
 package hipravin.javapuzzles;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import hipravin.javapuzzles.viewmodel.PuzzleViewModel;
+import hipravin.javapuzzles.viewmodel.ViewState;
 
 public class MainActivity extends AppCompatActivity {
+
+    private PuzzleViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Fragment puzzleListFragment = PuzzleListFragment.newInstance("", "");
-        Fragment puzzleFragment = PuzzleFragment.newInstance("1");
+        Toolbar mainToolbar = findViewById(R.id.mainToolbar);
+        setSupportActionBar(mainToolbar);
 
+
+        Fragment puzzleListFragment = PuzzleListFragment.newInstance("", "");
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.flFragment, puzzleListFragment)
-//                .replace(R.id.flFragment, puzzleFragment)
                 .commit();
 
-        ViewModelProvider.Factory factory = new ViewModelProvider.AndroidViewModelFactory(getApplication());
-        PuzzleViewModel model = new ViewModelProvider(getViewModelStore(), factory).get(PuzzleViewModel.class);
-        model.getPuzzles().observe(this, puzzleDescriptions -> {
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication());
+        viewModel = new ViewModelProvider(getViewModelStore(), factory).get(PuzzleViewModel.class);
 
-
-//            WebView codeWebView = (WebView)findViewById(R.id.puzzleCodeWebView);
-//            codeWebView.loadData(codeText, "text/html", null);
-//            TextView textView = (TextView)findViewById(R.id.txt1);
-//
-//            String descrs = puzzleDescriptions.stream()
-//                    .map(PuzzleDescription::getHeader)
-//                    .collect(Collectors.joining(", "));
-//
-//            textView.setText(descrs);
-            // update UI
+        viewModel.getViewState().observe(this, state -> {
+            if(state == ViewState.PUZZLE_LIST) {
+                setActionBarHome();
+            } else if(state == ViewState.PUZZLE_TASK) {
+                setActionBarPuzzle();
+            }
         });
-
-
     }
 
-    private void switchToPuzzleFragment(String puzzleId) {
-        Fragment puzzleFragment = PuzzleFragment.newInstance(puzzleId);
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.flFragment, puzzleFragment)
-                .commit();
-
-
+    private void setActionBarHome() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setTitle(R.string.app_name);
+        }
+    }
+    private void setActionBarPuzzle() {
+        if (getSupportActionBar() != null && viewModel != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if(viewModel.getPuzzleTask() != null) {
+                getSupportActionBar().setTitle(viewModel.getPuzzleTask().titleStringId());
+            }
+        }
     }
 
     @Override
-    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        View view = super.onCreateView(name, context, attrs);
-
-        if(view == null) {
-            return view;
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(viewModel != null) {
+            if (viewModel.getViewState().getValue() == ViewState.PUZZLE_TASK) {
+                viewModel.setViewStatePuzzleList();
+            }
         }
+    }
 
-        CardView puzzle1card = view.findViewById(R.id.puzzleCard1);
-        puzzle1card.setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
-//            switchToPuzzleFragment("1");
-        });
-
-        return view;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
