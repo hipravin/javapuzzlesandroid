@@ -7,11 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-public class PuzzleHelpDialogFragment extends DialogFragment {
-    private final int helpMessageId;
+public class PuzzleSolvedDialogFragment extends DialogFragment {
 
-    public PuzzleHelpDialogFragment(int helpMessageId) {
-        this.helpMessageId = helpMessageId;
+    public PuzzleSolvedDialogFragment() {
     }
 
     @NonNull
@@ -20,9 +18,9 @@ public class PuzzleHelpDialogFragment extends DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Puzzle solution advice");
-        builder.setMessage(helpMessageId);
-        builder.setPositiveButton("Ok...", new DialogInterface.OnClickListener() {
+        builder.setTitle("Congratulations!");
+        builder.setMessage("You have solved this puzzle.");
+        builder.setPositiveButton("Cool", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // You don't have to do anything here if you just
                 // want it dismissed when clicked

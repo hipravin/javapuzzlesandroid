@@ -3,6 +3,15 @@ package hipravin.javapuzzles.puzzles;
 import hipravin.javapuzzles.puzzles.impl.Puzzle1LongShift;
 
 public class PuzzleTaskRepository {
+    private static final PuzzleTaskRepository INSTANCE = new PuzzleTaskRepository();
+
+    private PuzzleTaskRepository() {
+    }
+
+    public static PuzzleTaskRepository getInstance() {
+        return INSTANCE;
+    }
+
     public PuzzleTask getForId(int puzzleNum) {
         switch (puzzleNum) {
             case 1:

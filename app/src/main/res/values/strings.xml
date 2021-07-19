@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Java Puzzles</string>
     <string name="runCodeButton">Run</string>
-    <string name="commonTaskDescription">Provide console input below.
+    <string name="commonTaskDescription">Provide console input on the bottom.
         Code execution should finish without exception and variable named \"passed\" should be true.</string>
 
     <string name="puzzle1title">1. Bit shift</string>

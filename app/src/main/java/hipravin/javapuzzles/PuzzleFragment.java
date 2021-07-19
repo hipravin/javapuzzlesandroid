@@ -1,28 +1,25 @@
 package hipravin.javapuzzles;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.textfield.TextInputEditText;
 import hipravin.javapuzzles.markup.CodeMarkupUtil;
 import hipravin.javapuzzles.puzzles.PuzzleInput;
 import hipravin.javapuzzles.puzzles.PuzzleInvocationResult;
 import hipravin.javapuzzles.puzzles.PuzzleTask;
 import hipravin.javapuzzles.puzzles.PuzzleTaskRepository;
+import hipravin.javapuzzles.viewmodel.PuzzleViewModel;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -40,6 +37,7 @@ public class PuzzleFragment extends Fragment {
 
     private String puzzleId;
     PuzzleTask puzzleTask = null;
+    PuzzleViewModel puzzleViewModel;
 
     public PuzzleFragment() {
         // Required empty public constructor
@@ -58,8 +56,13 @@ public class PuzzleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             puzzleId = getArguments().getString(ARG_PUZZLE_ID);
-            puzzleTask = new PuzzleTaskRepository().getForId(puzzleId);
+            puzzleTask = PuzzleTaskRepository.getInstance().getForId(puzzleId);
         }
+
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication());
+        puzzleViewModel = new ViewModelProvider(requireActivity().getViewModelStore(), factory).get(PuzzleViewModel.class);
+
     }
 
     @Override
@@ -75,7 +78,8 @@ public class PuzzleFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(puzzleTask != null) {
+
+        if (puzzleTask != null) {
             loadCode(view, savedInstanceState);
             setPuzzleViewText(view);
             assignOnRunButton(view);
@@ -126,7 +130,11 @@ public class PuzzleFragment extends Fragment {
                             ? consoleInput.getText().toString()
                             : "");
             PuzzleInvocationResult puzzleInvocationResult = puzzleTask.run(puzzleInput);
-            Toast.makeText(getContext(),puzzleInvocationResult.isPassed() ? "passed" : "failed",Toast.LENGTH_SHORT).show();
+
+            if(puzzleInvocationResult.isPassed() && puzzleTask != null) {
+                onPuzzleSolved();
+            }
+            Toast.makeText(getContext(), puzzleInvocationResult.isPassed() ? "passed" : "failed", Toast.LENGTH_SHORT).show();
 
             consoleTextView.setText("");
             String consoleOut = puzzleInvocationResult.getOutput().stream()
@@ -134,5 +142,14 @@ public class PuzzleFragment extends Fragment {
                     .collect(Collectors.joining());
             consoleTextView.setText(consoleOut);
         });
+    }
+
+    private void onPuzzleSolved() {
+        DialogFragment dialog = new PuzzleSolvedDialogFragment();
+        puzzleViewModel.setLastSolvedPuzzleId(puzzleTask.puzzleIdString());
+
+        if(getFragmentManager() != null) {
+            dialog.show(getFragmentManager(), "PuzzleSolvedDialog");
+        }
     }
 }

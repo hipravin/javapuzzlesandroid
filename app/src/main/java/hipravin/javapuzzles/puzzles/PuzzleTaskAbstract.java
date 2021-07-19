@@ -4,18 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PuzzleTaskAbstract implements PuzzleTask {
+    private int puzzleId;
     private int titleStringId;
     private int headerStringId;
     private int codeRawId;
-    private int prompStringId;
-    private int solutionRawId;
+    private int cardId;
 
-    public PuzzleTaskAbstract(int titleStringId, int headerStringId, int codeRawId, int prompStringId, int solutionRawId) {
+    public PuzzleTaskAbstract(int puzzleId, int titleStringId, int headerStringId, int codeRawId, int cardId) {
+        this.puzzleId = puzzleId;
         this.titleStringId = titleStringId;
         this.headerStringId = headerStringId;
         this.codeRawId = codeRawId;
-        this.prompStringId = prompStringId;
-        this.solutionRawId = solutionRawId;
+        this.cardId = cardId;
+    }
+
+    @Override
+    public int puzzleId() {
+        return puzzleId;
     }
 
     @Override
@@ -31,6 +36,11 @@ public abstract class PuzzleTaskAbstract implements PuzzleTask {
     @Override
     public int codeRawId() {
         return codeRawId;
+    }
+
+    @Override
+    public int cardId() {
+        return cardId;
     }
 
     protected abstract PuzzleInvocationResult runInternal(PuzzleInput puzzleInput, List<String> outputAccumulator);

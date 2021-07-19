@@ -6,17 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import hipravin.javapuzzles.db.PuzzleDatabaseHelper;
 import hipravin.javapuzzles.viewmodel.PuzzleViewModel;
 import hipravin.javapuzzles.viewmodel.ViewState;
 
 public class MainActivity extends AppCompatActivity {
 
     private PuzzleViewModel viewModel;
+    private PuzzleDatabaseHelper puzzleDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        puzzleDatabaseHelper = new PuzzleDatabaseHelper(this);
 
         Toolbar mainToolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(mainToolbar);
@@ -38,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
                 setActionBarPuzzle();
             }
         });
+
+        viewModel.getLastSolvedPuzzleId().observe(this, puzzleId -> {
+            if(puzzleId != null && !puzzleId.isEmpty()) {
+                onPuzzleSolved(puzzleId);
+            }
+        });
+    }
+
+    private void onPuzzleSolved(String puzzleId) {
+
     }
 
     private void setActionBarHome() {

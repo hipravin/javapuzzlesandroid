@@ -9,12 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.card.MaterialCardView;
 import hipravin.javapuzzles.puzzles.PuzzleTask;
 import hipravin.javapuzzles.puzzles.PuzzleTaskRepository;
 import hipravin.javapuzzles.viewmodel.PuzzleViewModel;
 
 
 public class PuzzleListFragment extends Fragment {
+
+    PuzzleViewModel viewModel;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -43,6 +46,16 @@ public class PuzzleListFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().getApplication());
+        viewModel = new ViewModelProvider(requireActivity().getViewModelStore(), factory).get(PuzzleViewModel.class);
+
+        viewModel.getLastSolvedPuzzleId().observe(this, puzzleId -> {
+            if(puzzleId != null && !puzzleId.isEmpty()) {
+                onPuzzleSolved(puzzleId);
+            }
+        });
+
     }
 
     @Override
@@ -56,10 +69,29 @@ public class PuzzleListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        CardView puzzle1card = view.findViewById(R.id.puzzleCard1);
+        MaterialCardView card1 = view.findViewById(R.id.puzzleCard1);
+        card1.setChecked(true);
+
+        MaterialCardView card2 = view.findViewById(R.id.puzzleCard2);
+        card2.setChecked(true);
+
+        MaterialCardView puzzle1card = view.findViewById(R.id.puzzleCard1);
         puzzle1card.setOnClickListener(v -> {
             switchToPuzzleFragment("1");
         });
+
+        MaterialCardView puzzle2card = view.findViewById(R.id.puzzleCard2);
+        puzzle2card.setOnClickListener(v -> {
+            switchToPuzzleFragment("1");
+        });
+    }
+
+    private void onPuzzleSolved(String puzzleId) {
+        if(getView() != null) {
+            MaterialCardView puzzleSolvedCard = getView().findViewById(
+                    PuzzleTaskRepository.getInstance().getForId(puzzleId).cardId());
+            puzzleSolvedCard.setChecked(true);
+        }
     }
 
     private void switchToPuzzleFragment(String puzzleId) {
@@ -75,7 +107,7 @@ public class PuzzleListFragment extends Fragment {
                     .getInstance(requireActivity().getApplication());
             PuzzleViewModel model = new ViewModelProvider(requireActivity().getViewModelStore(), factory).get(PuzzleViewModel.class);
 
-            PuzzleTask puzzleTask = new PuzzleTaskRepository().getForId(puzzleId);
+            PuzzleTask puzzleTask = PuzzleTaskRepository.getInstance().getForId(puzzleId);
 
             model.setViewStatePuzzle(puzzleId, puzzleTask);
 

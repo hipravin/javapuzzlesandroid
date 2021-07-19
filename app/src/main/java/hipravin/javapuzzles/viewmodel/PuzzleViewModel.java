@@ -12,8 +12,23 @@ import java.util.List;
 
 public class PuzzleViewModel extends ViewModel {
     private MutableLiveData<ViewState> viewState;
+    private MutableLiveData<String> lastSolvedPuzzleId;
     private String puzzleId;
     private PuzzleTask puzzleTask;
+
+    public synchronized LiveData<String> getLastSolvedPuzzleId() {
+        if (lastSolvedPuzzleId == null) {
+            lastSolvedPuzzleId = new MutableLiveData<>();
+        }
+        return lastSolvedPuzzleId;
+    }
+
+    public void setLastSolvedPuzzleId(String puzzleId) {
+        if (lastSolvedPuzzleId == null) {
+            lastSolvedPuzzleId = new MutableLiveData<>();
+        }
+        lastSolvedPuzzleId.postValue(puzzleId);
+    }
 
     public synchronized LiveData<ViewState> getViewState() {
         if (viewState == null) {
