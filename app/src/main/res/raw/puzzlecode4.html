@@ -9,9 +9,13 @@ public static void main(String[] args) {
 }
 
 static boolean test(int i) {
-    double x = i / 1000.0 - i / 1000;
+    Long l1 = (long) i;
+    Long l2 = (long) i;
+    Long l3 = (long) i - 1;
+    Long l4 = (long) i - 1;
 
-    System.out.println("x: " + x);
+    System.out.println("l1!=l2:" + (l1 != l2));
+    System.out.println("l3==l4:" + (l3==l4));
 
-    return x != 0 && (float) x == x;
+    return l1 != l2 && l3 == l4;
 }
