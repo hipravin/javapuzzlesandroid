@@ -2,6 +2,7 @@ package hipravin.javapuzzles.puzzles;
 
 import hipravin.javapuzzles.puzzles.impl.Puzzle0Tutorial;
 import hipravin.javapuzzles.puzzles.impl.Puzzle1LongShift;
+import hipravin.javapuzzles.puzzles.impl.Puzzle2DoubleFloat;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,6 +14,7 @@ public class PuzzleTaskRepository {
     private PuzzleTaskRepository() {
         puzzleTasks.put(0, new Puzzle0Tutorial());
         puzzleTasks.put(1, new Puzzle1LongShift());
+        puzzleTasks.put(2, new Puzzle2DoubleFloat());
     }
 
     public Map<Integer, PuzzleTask> getPuzzleTasks() {

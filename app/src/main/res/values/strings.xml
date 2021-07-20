@@ -18,5 +18,7 @@
 
     <string name="puzzle0title">0. Tutorial</string>
     <string name="puzzle1title">1. Bit shift</string>
+    <string name="puzzle2title">2. Double Float</string>
+    <string name="puzzle3title">3. Pending</string>
 
 </resources>
