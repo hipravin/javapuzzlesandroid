@@ -101,6 +101,7 @@ public class PuzzleFragment extends Fragment {
 
 
         } catch (IOException e) {
+            e.printStackTrace();
 //            throw new RuntimeException(e);
         }
     }
@@ -137,7 +138,7 @@ public class PuzzleFragment extends Fragment {
                 onPuzzleFailedTry();
             }
 
-            Toast.makeText(getContext(), puzzleInvocationResult.isPassed() ? "passed" : "failed", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), puzzleInvocationResult.isPassed() ? "passed" : "failed", Toast.LENGTH_SHORT).show();
 
             consoleTextView.setText("");
             String consoleOut = puzzleInvocationResult.getOutput().stream()

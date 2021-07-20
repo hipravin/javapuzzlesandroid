@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import hipravin.javapuzzles.db.PuzzleStatsEntity;
 import hipravin.javapuzzles.puzzles.PuzzleTask;
+import hipravin.javapuzzles.puzzles.PuzzleTaskRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class PuzzleViewModel extends ViewModel {
         if (lastTriedPuzzleId == null) {
             lastTriedPuzzleId = new MutableLiveData<>();
         }
-        getPuzzleStats().getValue().computeIfPresent(puzzleId, (id, pse) -> pse.tried());
+        getPuzzleStatsValue().computeIfPresent(puzzleId, (id, pse) -> pse.tried());
         lastTriedPuzzleId.postValue(puzzleId);
     }
 
@@ -69,7 +70,7 @@ public class PuzzleViewModel extends ViewModel {
         if(puzzleStats == null) {
             puzzleStats = new MutableLiveData<>();
         }
-        getPuzzleStats().getValue().computeIfPresent(puzzleId, (id, pse) -> pse.passed());
+        getPuzzleStatsValue().computeIfPresent(puzzleId, (id, pse) -> pse.passed());
 
         lastSolvedPuzzleId.postValue(puzzleId);
     }
@@ -98,8 +99,11 @@ public class PuzzleViewModel extends ViewModel {
 
     public static Map<String, PuzzleStatsEntity> defaultPuzzleStats() {
         Map<String, PuzzleStatsEntity> result = new HashMap<>();
-
-        result.put("1", new PuzzleStatsEntity("1", 0, false));
+        PuzzleTaskRepository.getInstance().getPuzzleTasks().keySet()
+                .forEach(id -> {
+                    String idString = String.valueOf(id);
+                    result.put(idString, new PuzzleStatsEntity(idString, 0, false));
+                });
 
         return result;
     }

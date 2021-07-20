@@ -1,0 +1,14 @@
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.next();
+
+    System.out.println("input: " + input);
+    boolean passed = test(input);
+
+    System.out.println(
+        passed ? "passed" : "failed");
+}
+
+static boolean test(String s) {
+    return s.equals("Tutorial");
+}

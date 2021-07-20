@@ -20,7 +20,7 @@
                     android:weightSum="2"
                     android:orientation="horizontal">
                 <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/puzzleCard2"
+                        android:id="@+id/puzzleCard0"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:checkable="true"
@@ -38,11 +38,11 @@
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2. UPPERCASE "
+                                android:text="@string/puzzle0title"
                                 android:textAppearance="?attr/textAppearanceBody2"
                         />
                         <TextView
-                                android:id="@+id/puzzleTriesText2"
+                                android:id="@+id/puzzleTriesText0"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=""
@@ -71,7 +71,7 @@
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1. UPPERCASE MAY"
+                                android:text="@string/puzzle1title"
                                 android:textAppearance="?attr/textAppearanceBody2"
                         />
                         <TextView
@@ -89,90 +89,6 @@
 
             </LinearLayout>
         </LinearLayout>
-<!--        <GridLayout-->
-<!--                android:columnCount="2"-->
-<!--                android:rowCount="20"-->
-<!--                android:alignmentMode="alignMargins"-->
-<!--                android:columnOrderPreserved="false"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-<!--            -->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/puzzleCard1"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_columnWeight="1"-->
-<!--                    android:layout_rowWeight="1"-->
-<!--                    app:cardElevation="6dp"-->
-<!--                    app:cardCornerRadius="12dp"-->
-<!--                    android:layout_margin="12dp">-->
-<!--                <LinearLayout-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:padding="16dp"-->
-<!--                        android:gravity="center"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent">-->
-<!--                    <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="@string/puzzle1title"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                            app:layout_constraintRight_toRightOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"/>-->
-<!--                    <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Not solved"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                            app:layout_constraintRight_toRightOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"/>-->
-
-<!--                </LinearLayout>-->
-
-
-<!--            </androidx.cardview.widget.CardView>-->
-<!--            <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/puzzleCard2"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_columnWeight="1"-->
-<!--                    android:layout_rowWeight="1"-->
-<!--                    app:cardElevation="6dp"-->
-<!--                    app:cardCornerRadius="12dp"-->
-<!--                    android:layout_margin="12dp">-->
-<!--                <LinearLayout-->
-<!--                        android:orientation="vertical"-->
-<!--                        android:padding="16dp"-->
-<!--                        android:gravity="center"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent">-->
-<!--                    <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="@string/puzzle1title"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                            app:layout_constraintRight_toRightOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"/>-->
-<!--                    <TextView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:text="Hello World1!"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                            app:layout_constraintRight_toRightOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"/>-->
-
-<!--                </LinearLayout>-->
-
-
-<!--            </androidx.cardview.widget.CardView>-->
-
-<!--        </GridLayout>-->
-
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

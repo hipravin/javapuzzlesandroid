@@ -5,8 +5,18 @@
     <string name="commonTaskDescription">Provide console input on the bottom.
         Code execution should finish without exception and variable named \"passed\" should be true.</string>
 
-    <string name="puzzle1title">1. Bit shift</string>
-    <string name="puzzle1prompt">Bit operations &gt;&gt; and &gt;&gt;&gt; have different semantics.</string>
+    <string name="tutorialTaskDescription">
+        In order to solve the puzzle:\n
+        1. Examine code listing below and understand it\'s execution logic.\n
+        2. Figure out what console input makes program finish without exception and fits final condition.\n
+        3. Put your answer in text field on the bottom and click to run.\n
+        4. Console output will show if answer is correct along with some debug information.\n
+        5. In the tutorial answer is \"Tutorial\".
+    </string>
+
     <string name="consoleInputHint">Console input</string>
+
+    <string name="puzzle0title">0. Tutorial</string>
+    <string name="puzzle1title">1. Bit shift</string>
 
 </resources>

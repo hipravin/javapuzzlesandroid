@@ -10,59 +10,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/linearLayout">
 
-<!--        <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:paddingBottom="@dimen/divider_padding"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/linearLayout">-->
-<!--            <ImageButton-->
-<!--                    android:id="@+id/buttonPuzzleBack"-->
-<!--                    android:src="@drawable/baseline_arrow_back_black_24dp"-->
-<!--                    android:background="@color/white"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_gravity="start"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"/>-->
-
-<!--            <TextView-->
-<!--                      android:id="@+id/puzzleTitle"-->
-<!--                      android:layout_width="0dp"-->
-<!--                      android:layout_height="match_parent"-->
-<!--                      android:layout_weight="3"-->
-<!--                      android:gravity="center_vertical|start"-->
-<!--                      android:textSize="18sp"-->
-<!--                      android:paddingLeft="4dp"-->
-<!--                      android:text="1."-->
-<!--                      android:layout_gravity="start"/>-->
-<!--            <ImageButton-->
-<!--                    android:id="@+id/buttonEnableDebug"-->
-<!--                    android:src="@drawable/baseline_bug_report_black_24dp"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:background="@color/white"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"/>-->
-<!--            <ImageButton-->
-<!--                    android:id="@+id/buttonPuzzleHelp"-->
-<!--                    android:src="@drawable/baseline_help_outline_black_24dp"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:background="@color/white"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"/>-->
-<!--            <ImageButton-->
-<!--                    android:id="@+id/buttonSeeSolution"-->
-<!--                    android:src="@drawable/baseline_developer_board_black_24dp"-->
-<!--                    android:background="@color/white"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"/>-->
-
-
-<!--        </LinearLayout>-->
-<!--        <View style="@style/Divider"/>-->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -88,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:minLines="30"
+                android:minLines="23"
         />
         <TextView
                 android:id="@+id/puzzleConsoleTextView"

@@ -83,11 +83,17 @@ public class PuzzleListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MaterialCardView puzzle1card = view.findViewById(R.id.puzzleCard1);
-        puzzle1card.setOnClickListener(v -> {
-            switchToPuzzleFragment("1");
-        });
+        assignOnCardClicks(view, savedInstanceState);
         onPuzzleStatsUpdated(view, viewModel.getPuzzleStats().getValue());
+    }
+
+    private void assignOnCardClicks(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        PuzzleTaskRepository.getInstance().getPuzzleTasks().forEach((id, task) -> {
+            MaterialCardView puzzleCard = view.findViewById(task.cardId());
+            puzzleCard.setOnClickListener(v -> {
+                switchToPuzzleFragment(String.valueOf(id));
+            });
+        });
     }
 
     private void onPuzzleStatsUpdated(View view, Map<String, PuzzleStatsEntity> stats) {
@@ -123,9 +129,9 @@ public class PuzzleListFragment extends Fragment {
             TextView triesText = getView().findViewById(
                     PuzzleTaskRepository.getInstance().getForId(puzzleId).triesTextId());
 
-            PuzzleStatsEntity puzzleStatsEntity = viewModel.getPuzzleStats().getValue().get(puzzleId);
+            PuzzleStatsEntity puzzleStatsEntity = viewModel.getPuzzleStatsValue().get(puzzleId);
             if (puzzleStatsEntity != null) {
-                triesText.setText("tries: " + puzzleStatsEntity.getTriesBeforePassed());
+                triesText.setText(getResources().getString(R.string.triesString, puzzleStatsEntity.getTriesBeforePassed()));
             }
         }
     }
