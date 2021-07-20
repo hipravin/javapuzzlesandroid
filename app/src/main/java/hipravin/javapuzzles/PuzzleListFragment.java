@@ -1,9 +1,9 @@
 package hipravin.javapuzzles;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.card.MaterialCardView;
 import hipravin.javapuzzles.puzzles.PuzzleTask;
 import hipravin.javapuzzles.puzzles.PuzzleTaskRepository;
+import hipravin.javapuzzles.db.PuzzleStatsEntity;
 import hipravin.javapuzzles.viewmodel.PuzzleViewModel;
+
+import java.util.Map;
 
 
 public class PuzzleListFragment extends Fragment {
@@ -51,11 +54,22 @@ public class PuzzleListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity().getViewModelStore(), factory).get(PuzzleViewModel.class);
 
         viewModel.getLastSolvedPuzzleId().observe(this, puzzleId -> {
-            if(puzzleId != null && !puzzleId.isEmpty()) {
+            if (puzzleId != null && !puzzleId.isEmpty()) {
                 onPuzzleSolved(puzzleId);
             }
         });
 
+        viewModel.getLastTriedPuzzleId().observe(this, puzzleId -> {
+            if (puzzleId != null && !puzzleId.isEmpty()) {
+                onPuzzleFailedTry(puzzleId);
+            }
+        });
+
+        viewModel.getPuzzleStats().observe(this, stats -> {
+            if(stats != null) {
+                onPuzzleStatsUpdated(getView(), stats);
+            }
+        } );
     }
 
     @Override
@@ -69,35 +83,57 @@ public class PuzzleListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MaterialCardView card1 = view.findViewById(R.id.puzzleCard1);
-        card1.setChecked(true);
-
-        MaterialCardView card2 = view.findViewById(R.id.puzzleCard2);
-        card2.setChecked(true);
-
         MaterialCardView puzzle1card = view.findViewById(R.id.puzzleCard1);
         puzzle1card.setOnClickListener(v -> {
             switchToPuzzleFragment("1");
         });
+        onPuzzleStatsUpdated(view, viewModel.getPuzzleStats().getValue());
+    }
 
-        MaterialCardView puzzle2card = view.findViewById(R.id.puzzleCard2);
-        puzzle2card.setOnClickListener(v -> {
-            switchToPuzzleFragment("1");
-        });
+    private void onPuzzleStatsUpdated(View view, Map<String, PuzzleStatsEntity> stats) {
+        if(view != null) {
+            stats.forEach((id, pse) -> {
+                TextView triesText = view.findViewById(
+                        PuzzleTaskRepository.getInstance().getForId(id).triesTextId());
+
+                if (triesText != null && pse.getTriesBeforePassed() > 0) {
+                    triesText.setText(getResources().getString(R.string.triesString, pse.getTriesBeforePassed()));
+                }
+
+                if (pse.isPassed()) {
+                    MaterialCardView puzzleCard = view.findViewById(
+                            PuzzleTaskRepository.getInstance().getForId(pse.getPuzzleId()).cardId());
+
+                    puzzleCard.setChecked(true);
+                }
+            });
+        }
     }
 
     private void onPuzzleSolved(String puzzleId) {
-        if(getView() != null) {
+        if (getView() != null) {
             MaterialCardView puzzleSolvedCard = getView().findViewById(
                     PuzzleTaskRepository.getInstance().getForId(puzzleId).cardId());
             puzzleSolvedCard.setChecked(true);
         }
     }
 
+    private void onPuzzleFailedTry(String puzzleId) {
+        if (getView() != null) {
+            TextView triesText = getView().findViewById(
+                    PuzzleTaskRepository.getInstance().getForId(puzzleId).triesTextId());
+
+            PuzzleStatsEntity puzzleStatsEntity = viewModel.getPuzzleStats().getValue().get(puzzleId);
+            if (puzzleStatsEntity != null) {
+                triesText.setText("tries: " + puzzleStatsEntity.getTriesBeforePassed());
+            }
+        }
+    }
+
     private void switchToPuzzleFragment(String puzzleId) {
         Fragment puzzleFragment = PuzzleFragment.newInstance(puzzleId);
 
-        if(getFragmentManager() != null) {
+        if (getFragmentManager() != null) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.flFragment, puzzleFragment)
                     .addToBackStack(null)

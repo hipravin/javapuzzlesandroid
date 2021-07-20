@@ -1,30 +1,37 @@
 package hipravin.javapuzzles;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import hipravin.javapuzzles.db.PuzzleDatabaseHelper;
+import androidx.room.Room;
+import hipravin.javapuzzles.db.PuzzleDatabase;
+import hipravin.javapuzzles.db.PuzzleStatsDao;
+import hipravin.javapuzzles.db.PuzzleStatsEntity;
 import hipravin.javapuzzles.viewmodel.PuzzleViewModel;
 import hipravin.javapuzzles.viewmodel.ViewState;
 
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
+    public static final String DB_NAME = "JAVA_PUZZLES_DB_01";
 
     private PuzzleViewModel viewModel;
-    private PuzzleDatabaseHelper puzzleDatabaseHelper;
+    private PuzzleDatabase puzzleDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        puzzleDatabaseHelper = new PuzzleDatabaseHelper(this);
+        puzzleDatabase = Room.databaseBuilder(getApplicationContext(),
+                PuzzleDatabase.class, DB_NAME).build();
 
         Toolbar mainToolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(mainToolbar);
-
 
         Fragment puzzleListFragment = PuzzleListFragment.newInstance("", "");
 
@@ -34,24 +41,29 @@ public class MainActivity extends AppCompatActivity {
 
         ViewModelProvider.Factory factory = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication());
         viewModel = new ViewModelProvider(getViewModelStore(), factory).get(PuzzleViewModel.class);
+        //init in main thread
+        viewModel.getPuzzleStats();
+        new LoadPuzzleStatsTask().execute();
 
         viewModel.getViewState().observe(this, state -> {
-            if(state == ViewState.PUZZLE_LIST) {
+            if (state == ViewState.PUZZLE_LIST) {
                 setActionBarHome();
-            } else if(state == ViewState.PUZZLE_TASK) {
+            } else if (state == ViewState.PUZZLE_TASK) {
                 setActionBarPuzzle();
             }
         });
 
         viewModel.getLastSolvedPuzzleId().observe(this, puzzleId -> {
-            if(puzzleId != null && !puzzleId.isEmpty()) {
-                onPuzzleSolved(puzzleId);
+            if (puzzleId != null && !puzzleId.isEmpty()) {
+                onPuzzleStatsChanged(puzzleId);
             }
         });
-    }
 
-    private void onPuzzleSolved(String puzzleId) {
-
+        viewModel.getLastTriedPuzzleId().observe(this, puzzleId -> {
+            if (puzzleId != null && !puzzleId.isEmpty()) {
+                onPuzzleStatsChanged(puzzleId);
+            }
+        });
     }
 
     private void setActionBarHome() {
@@ -60,10 +72,11 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.app_name);
         }
     }
+
     private void setActionBarPuzzle() {
         if (getSupportActionBar() != null && viewModel != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if(viewModel.getPuzzleTask() != null) {
+            if (viewModel.getPuzzleTask() != null) {
                 getSupportActionBar().setTitle(viewModel.getPuzzleTask().titleStringId());
             }
         }
@@ -72,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(viewModel != null) {
+        if (viewModel != null) {
             if (viewModel.getViewState().getValue() == ViewState.PUZZLE_TASK) {
                 viewModel.setViewStatePuzzleList();
             }
@@ -87,5 +100,71 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void onPuzzleStatsChanged(String puzzleId) {
+        new UpdatePuzzleStatsTask(puzzleId).execute();
+    }
+
+    class LoadPuzzleStatsTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                PuzzleStatsDao puzzleStatsDao = puzzleDatabase.puzzleStatsDao();
+                if(viewModel != null) {
+                    Map<String, PuzzleStatsEntity> stats = puzzleStatsDao.getAllWithDefaults(viewModel.getPuzzleStatsValue());
+                    viewModel.postPuzzleStatsValue(stats);
+                }
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+    }
+
+    class UpdatePuzzleStatsTask extends AsyncTask<Void, Void, Void> {
+
+        private final String puzzleId;
+
+        UpdatePuzzleStatsTask(String puzzleId) {
+            this.puzzleId = puzzleId;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                PuzzleStatsEntity puzzleStatsEntity = viewModel.getPuzzleStatsValue().get(puzzleId);
+
+                if (puzzleStatsEntity != null) {
+                    puzzleDatabase.puzzleStatsDao().saveOrUpdate(puzzleStatsEntity);
+                }
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
     }
 }

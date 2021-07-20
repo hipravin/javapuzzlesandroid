@@ -16,18 +16,19 @@ public class PuzzleDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable =
-                "CREATE TABLE PUZZLE ( " +
-                " PUZZLE_ID INTEGER PRIMARY KEY , " +
-                " TRIES_BEFORE_PASSED INTEGER, " +
-                " PASSED BOOLEAN, " +
-                " TEXT NOT NULL);";
+                "CREATE TABLE PUZZLE_STATS ( " +
+                        " PUZZLE_ID INTEGER PRIMARY KEY , " +
+                        " TRIES_BEFORE_PASSED INTEGER, " +
+                        " PASSED BOOLEAN, " +
+                        " TEXT NOT NULL);";
 
         db.execSQL(createTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS PUZZLE");
+        db.execSQL("DROP TABLE IF EXISTS PUZZLE_STATS");
         onCreate(db);
     }
 }
+

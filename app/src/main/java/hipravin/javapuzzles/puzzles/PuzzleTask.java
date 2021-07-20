@@ -7,6 +7,7 @@ public interface PuzzleTask {
     int headerStringId();
     int codeRawId();
     int cardId();
+    int triesTextId();
 
     default String puzzleIdString() {
         return String.valueOf(puzzleId());

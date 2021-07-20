@@ -9,13 +9,15 @@ public abstract class PuzzleTaskAbstract implements PuzzleTask {
     private int headerStringId;
     private int codeRawId;
     private int cardId;
+    private int triesTextId;
 
-    public PuzzleTaskAbstract(int puzzleId, int titleStringId, int headerStringId, int codeRawId, int cardId) {
+    public PuzzleTaskAbstract(int puzzleId, int titleStringId, int headerStringId, int codeRawId, int cardId, int triesTextId) {
         this.puzzleId = puzzleId;
         this.titleStringId = titleStringId;
         this.headerStringId = headerStringId;
         this.codeRawId = codeRawId;
         this.cardId = cardId;
+        this.triesTextId = triesTextId;
     }
 
     @Override
@@ -41,6 +43,11 @@ public abstract class PuzzleTaskAbstract implements PuzzleTask {
     @Override
     public int cardId() {
         return cardId;
+    }
+
+    @Override
+    public int triesTextId() {
+        return triesTextId;
     }
 
     protected abstract PuzzleInvocationResult runInternal(PuzzleInput puzzleInput, List<String> outputAccumulator);

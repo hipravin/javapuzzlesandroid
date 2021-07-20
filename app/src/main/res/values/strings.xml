@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Java Puzzles</string>
     <string name="runCodeButton">Run</string>
+    <string name="triesString">tries: %1$d</string>
     <string name="commonTaskDescription">Provide console input on the bottom.
         Code execution should finish without exception and variable named \"passed\" should be true.</string>
 

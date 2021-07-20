@@ -131,9 +131,12 @@ public class PuzzleFragment extends Fragment {
                             : "");
             PuzzleInvocationResult puzzleInvocationResult = puzzleTask.run(puzzleInput);
 
-            if(puzzleInvocationResult.isPassed() && puzzleTask != null) {
+            if (puzzleInvocationResult.isPassed()) {
                 onPuzzleSolved();
+            } else {
+                onPuzzleFailedTry();
             }
+
             Toast.makeText(getContext(), puzzleInvocationResult.isPassed() ? "passed" : "failed", Toast.LENGTH_SHORT).show();
 
             consoleTextView.setText("");
@@ -148,8 +151,12 @@ public class PuzzleFragment extends Fragment {
         DialogFragment dialog = new PuzzleSolvedDialogFragment();
         puzzleViewModel.setLastSolvedPuzzleId(puzzleTask.puzzleIdString());
 
-        if(getFragmentManager() != null) {
+        if (getFragmentManager() != null) {
             dialog.show(getFragmentManager(), "PuzzleSolvedDialog");
         }
+    }
+
+    private void onPuzzleFailedTry() {
+        puzzleViewModel.setLastTriedPuzzleId(puzzleTask.puzzleIdString());
     }
 }
