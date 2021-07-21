@@ -1,0 +1,27 @@
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.next();
+
+    boolean passed = test(input);
+
+    System.out.println(
+        passed ? "passed" : "failed");
+}
+
+static boolean test(String zoneId) {
+    ZonedDateTime zdt1 =
+        LocalDate.of(2021, Month.JANUARY, 1)
+            .atStartOfDay(ZoneId.of(zoneId));
+
+    ZonedDateTime zdt2 =
+        LocalDate.of(2021, Month.JULY, 1)
+            .atStartOfDay(ZoneId.of(zoneId));
+
+    System.out.println(
+        "ztd1offset:" + zdt1.getOffset());
+    System.out.println(
+        "ztd2offset:" + zdt2.getOffset());
+
+    return
+        !zdt1.getOffset().equals(zdt2.getOffset());
+}
