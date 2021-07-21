@@ -1,0 +1,18 @@
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.next();
+
+    boolean passed = test(input);
+
+    System.out.println(
+        passed ? "passed" : "failed");
+}
+
+static boolean test(String s) {
+    String s2 = new String(s.getBytes(),
+        StandardCharsets.US_ASCII);
+
+    System.out.println("s2: " + s2);
+
+    return !s.equals(s2);
+}

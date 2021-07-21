@@ -5,6 +5,8 @@
     <string name="commonTaskDescription">Provide console input on the bottom.
         Code execution should finish without exception and variable named \"passed\" should be true.</string>
 
+    <string name="regexpRegrets">The plural of regex is regrets.</string>
+
     <string name="tutorialTaskDescription">
         In order to solve the puzzle:\n
         1. Examine code listing below and understand it\'s execution logic.\n
@@ -21,6 +23,21 @@
     <string name="puzzle2title">2. Double Float</string>
     <string name="puzzle3title">3. iSquare</string>
     <string name="puzzle4title">4. Long ==</string>
-    <string name="puzzle5title">5. Penging </string>
+    <string name="puzzle5title">5. String bytes </string>
+    <string name="puzzle6title">6. Reverse</string>
+    <string name="puzzle7title">7. Regex</string>
+    <string name="puzzle8title">8.  TBD</string>
+    <string name="puzzle9title">9.  TBD</string>
+    <string name="puzzle10title">10. TBD </string>
+    <string name="puzzle11title">10. TBD </string>
+    <string name="puzzle12title">11. TBD </string>
+    <string name="puzzle13title">12. TBD </string>
+    <string name="puzzle14title">13. TBD </string>
+    <string name="puzzle15title">14. TBD </string>
+    <string name="puzzle16title">15. TBD </string>
+    <string name="puzzle17title">16. TBD </string>
+    <string name="puzzle18title">17. TBD </string>
+    <string name="puzzle19title">18. TBD </string>
+
 
 </resources>

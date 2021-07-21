@@ -15,6 +15,8 @@ public class PuzzleTaskRepository {
         puzzleTasks.put(2, new Puzzle2DoubleFloat());
         puzzleTasks.put(3, new Puzzle3iSquare());
         puzzleTasks.put(4, new Puzzle4iPool());
+        puzzleTasks.put(5, new Puzzle5Charset());
+        puzzleTasks.put(6, new Puzzle6Reverse());
     }
 
     public Map<Integer, PuzzleTask> getPuzzleTasks() {
