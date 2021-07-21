@@ -28,7 +28,8 @@ public class PuzzleStatsEntity {
     }
 
     public PuzzleStatsEntity passed() {
-        return new PuzzleStatsEntity(puzzleId, triesBeforePassed + 1, true);
+        int tries = passed ? triesBeforePassed : triesBeforePassed + 1;
+        return new PuzzleStatsEntity(puzzleId, tries, true);
     }
 
     public PuzzleStatsEntity tried() {

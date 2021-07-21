@@ -384,6 +384,80 @@
 
 
             </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/puzzleCard10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:checkable="true"
+                        android:layout_weight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="8dp">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/puzzle10title"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                        />
+                        <TextView
+                                android:id="@+id/puzzleTriesText10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:layout_gravity="end"
+                                android:textColor="?android:attr/textColorSecondary"
+                                android:textAppearance="?attr/textAppearanceBody2"/>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/puzzleCard11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:checkable="true"
+                        android:layout_weight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_margin="8dp">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/puzzle11title"
+                                android:textAppearance="?attr/textAppearanceBody2"
+                        />
+                        <TextView
+                                android:id="@+id/puzzleTriesText11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:layout_gravity="end"
+                                android:textColor="?android:attr/textColorSecondary"
+                                android:textAppearance="?attr/textAppearanceBody2"/>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -18,6 +18,8 @@ public class PuzzleTaskRepository {
         puzzleTasks.put(5, new Puzzle5Charset());
         puzzleTasks.put(6, new Puzzle6Reverse());
         puzzleTasks.put(7, new Puzzle7Regrets());
+        puzzleTasks.put(8, new Puzzle8LeapYear());
+        puzzleTasks.put(9, new Puzzle9YYYY());
     }
 
     public Map<Integer, PuzzleTask> getPuzzleTasks() {
