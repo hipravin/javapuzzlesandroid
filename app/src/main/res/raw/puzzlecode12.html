@@ -1,0 +1,22 @@
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.next();
+
+    boolean passed = test(Integer.parseInt(input));
+
+    System.out.println(
+        passed ? "passed" : "failed");
+}
+
+static boolean test(int len) {
+    String s = " Hello, nbsp\u00A0";
+
+    String trim = s.trim();
+
+    System.out.println(
+        "s_: '" + s + "'");
+    System.out.println(
+        "st: '" + trim + "'");
+
+    return len == trim.length();
+}

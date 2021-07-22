@@ -1,4 +1,8 @@
 <resources>
+    <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+    <string name="dbmobAppId">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admobUnitId">ca-app-pub-3940256099942544/6300978111</string>
+
     <string name="app_name">Java Puzzles</string>
     <string name="runCodeButton">Run</string>
     <string name="triesString">tries: %1$d</string>
@@ -29,15 +33,16 @@
     <string name="puzzle8title">8. Date format </string>
     <string name="puzzle9title">9. Date for mad</string>
     <string name="puzzle10title">10. Timezone </string>
-    <string name="puzzle11title">11. TBD </string>
-    <string name="puzzle12title">12. TBD </string>
-    <string name="puzzle13title">13. TBD </string>
+    <string name="puzzle11title">11. Relativize </string>
+    <string name="puzzle12title">12. Not so trim </string>
+    <string name="puzzle13title">13. Log2n </string>
     <string name="puzzle14title">14. TBD </string>
     <string name="puzzle15title">15. TBD </string>
     <string name="puzzle16title">16. TBD </string>
     <string name="puzzle17title">17. TBD </string>
     <string name="puzzle18title">18. TBD </string>
     <string name="puzzle19title">19. TBD </string>
+
 
 
 </resources>

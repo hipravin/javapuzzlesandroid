@@ -1,0 +1,22 @@
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.next();
+
+    boolean passed = test(Integer.parseInt(input));
+
+    System.out.println(
+        passed ? "passed" : "failed");
+}
+
+static boolean test(int actual) {
+    int expected =
+        new Random(LocalDate.now().hashCode())
+           .nextInt();
+
+    if(actual < expected) {
+        System.out.println("actual < expected");
+    } else {
+        System.out.println("actual >= expected");
+    }
+    return actual == expected;
+}

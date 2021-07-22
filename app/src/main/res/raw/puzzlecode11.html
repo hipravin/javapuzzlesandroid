@@ -1,0 +1,22 @@
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String input = sc.next();
+
+    boolean passed = test(input);
+
+    System.out.println(
+        passed ? "passed" : "failed");
+}
+
+static boolean test(String qValue) {
+    Path p = Paths.get("/var/log");
+    Path q = Paths.get(qValue);
+
+    Path qq = p.relativize(p.resolve(q));
+
+    System.out.println(
+        "p res q: " + p.resolve(q));
+    System.out.println("qq:" + qq);
+
+    return !q.equals(qq);
+}

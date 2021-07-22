@@ -21,9 +21,9 @@ public class PuzzleTaskRepository {
         puzzleTasks.put(8, new Puzzle8LeapYear());
         puzzleTasks.put(9, new Puzzle9YYYY());
         puzzleTasks.put(10, new Puzzle10Dst());
-        puzzleTasks.put(11, new Puzzle11());
-        puzzleTasks.put(12, new Puzzle12());
-        puzzleTasks.put(13, new Puzzle13());
+        puzzleTasks.put(11, new Puzzle11Paths());
+        puzzleTasks.put(12, new Puzzle12TrimStrip());
+        puzzleTasks.put(13, new Puzzle13BinarySearch());
         puzzleTasks.put(14, new Puzzle14());
         puzzleTasks.put(15, new Puzzle15());
         puzzleTasks.put(16, new Puzzle16());
