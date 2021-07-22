@@ -18,9 +18,9 @@ public class PuzzleSolvedDialogFragment extends DialogFragment {
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Congratulations!");
-        builder.setMessage("You have solved this puzzle.");
-        builder.setPositiveButton("Cool", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.dialogSolvedTitle);
+        builder.setMessage(R.string.dialogSolvedMessage);
+        builder.setPositiveButton(R.string.dialogSolvedOk, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // You don't have to do anything here if you just
                 // want it dismissed when clicked

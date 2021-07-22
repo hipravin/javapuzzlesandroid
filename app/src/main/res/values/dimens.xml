@@ -1,3 +1,4 @@
 <resources>
     <dimen name="divider_padding">8dp</dimen>
+    <dimen name="adscrollpadding">64dp</dimen>
 </resources>

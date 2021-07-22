@@ -13,7 +13,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="60dp">
+                android:paddingBottom="@dimen/adscrollpadding">
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -536,7 +536,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:weightSum="2"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
                 <com.google.android.material.card.MaterialCardView
                         android:id="@+id/puzzleCard14"
                         android:layout_width="0dp"
@@ -610,7 +611,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:weightSum="2"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
                 <com.google.android.material.card.MaterialCardView
                         android:id="@+id/puzzleCard16"
                         android:layout_width="0dp"
@@ -684,7 +686,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:weightSum="2"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
                 <com.google.android.material.card.MaterialCardView
                         android:id="@+id/puzzleCard18"
                         android:layout_width="0dp"

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.card.MaterialCardView;
 import hipravin.javapuzzles.puzzles.PuzzleTask;
 import hipravin.javapuzzles.puzzles.PuzzleTaskRepository;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 public class PuzzleListFragment extends Fragment {
 
+    private boolean hideAdOnPuzzle = false;
     PuzzleViewModel viewModel;
 
     private static final String ARG_PARAM1 = "param1";
@@ -66,10 +68,10 @@ public class PuzzleListFragment extends Fragment {
         });
 
         viewModel.getPuzzleStats().observe(this, stats -> {
-            if(stats != null) {
+            if (stats != null) {
                 onPuzzleStatsUpdated(getView(), stats);
             }
-        } );
+        });
     }
 
     @Override
@@ -97,7 +99,7 @@ public class PuzzleListFragment extends Fragment {
     }
 
     private void onPuzzleStatsUpdated(View view, Map<String, PuzzleStatsEntity> stats) {
-        if(view != null) {
+        if (view != null) {
             stats.forEach((id, pse) -> {
                 TextView triesText = view.findViewById(
                         PuzzleTaskRepository.getInstance().getForId(id).triesTextId());
@@ -137,6 +139,13 @@ public class PuzzleListFragment extends Fragment {
     }
 
     private void switchToPuzzleFragment(String puzzleId) {
+        if (getView() != null) {
+            AdView adView = requireActivity().findViewById(R.id.adView);
+            if(adView != null && hideAdOnPuzzle) {
+                adView.setVisibility(View.GONE);
+            }
+        }
+
         Fragment puzzleFragment = PuzzleFragment.newInstance(puzzleId);
 
         if (getFragmentManager() != null) {

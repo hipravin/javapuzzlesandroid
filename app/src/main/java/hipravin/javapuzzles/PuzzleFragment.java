@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.textfield.TextInputEditText;
 import hipravin.javapuzzles.markup.CodeMarkupUtil;
 import hipravin.javapuzzles.puzzles.PuzzleInput;
@@ -123,8 +124,15 @@ public class PuzzleFragment extends Fragment {
     private void assignOnRunButton(View view) {
         ImageButton runButton = view.findViewById(R.id.runPuzzleButton);
         TextView consoleTextView = view.findViewById(R.id.puzzleConsoleTextView);
-//        TextView consoleInput = view.findViewById(R.id.puzzleTextInput1);
         TextInputEditText consoleInput = view.findViewById(R.id.puzzleTextInput1);
+
+        consoleInput.setOnFocusChangeListener((view1, b) -> {
+            AdView adView = requireActivity().findViewById(R.id.adView);
+            if(adView != null) {
+                adView.setVisibility(View.GONE);
+            }
+        });
+
         runButton.setOnClickListener(v -> {
             PuzzleInput puzzleInput = new PuzzleInput(
                     consoleInput.getText() != null

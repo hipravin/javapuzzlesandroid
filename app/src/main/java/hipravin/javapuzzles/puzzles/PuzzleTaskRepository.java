@@ -24,12 +24,12 @@ public class PuzzleTaskRepository {
         puzzleTasks.put(11, new Puzzle11Paths());
         puzzleTasks.put(12, new Puzzle12TrimStrip());
         puzzleTasks.put(13, new Puzzle13BinarySearch());
-        puzzleTasks.put(14, new Puzzle14());
-        puzzleTasks.put(15, new Puzzle15());
-        puzzleTasks.put(16, new Puzzle16());
-        puzzleTasks.put(17, new Puzzle17());
-        puzzleTasks.put(18, new Puzzle18());
-        puzzleTasks.put(19, new Puzzle19());
+//        puzzleTasks.put(14, new Puzzle14());
+//        puzzleTasks.put(15, new Puzzle15());
+//        puzzleTasks.put(16, new Puzzle16());
+//        puzzleTasks.put(17, new Puzzle17());
+//        puzzleTasks.put(18, new Puzzle18());
+//        puzzleTasks.put(19, new Puzzle19());
     }
 
     public Map<Integer, PuzzleTask> getPuzzleTasks() {

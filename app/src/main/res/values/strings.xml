@@ -20,7 +20,11 @@
         5. In the tutorial answer is \"Tutorial\".
     </string>
 
-    <string name="consoleInputHint">Console input</string>
+    <string name="consoleInputHint">Answer…</string>
+
+    <string name="dialogSolvedTitle">Congratulations!</string>
+    <string name="dialogSolvedMessage">You have solved this puzzle.</string>
+    <string name="dialogSolvedOk">OK</string>
 
     <string name="puzzle0title">0. Tutorial</string>
     <string name="puzzle1title">1. Bit shift</string>

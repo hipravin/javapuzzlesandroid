@@ -35,21 +35,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:minLines="23"
+                android:minLines="10"
         />
         <TextView
                 android:id="@+id/puzzleConsoleTextView"
                 android:text=">"
-                android:textColor="@color/white"
-                android:background="@color/black"
+                android:textColor="@color/black"
+                android:background="@color/console_light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minLines="5"
+                android:minLines="2"
         />
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/adscrollpadding"
+        >
 
 <!--            <EditText-->
 <!--                    android:id="@+id/puzzleTextInput1"-->
@@ -91,12 +93,4 @@
 
 
     </LinearLayout>
-
-<!--    <WebView-->
-<!--            android:id="@+id/puzzleCodeWebView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" tools:layout_editor_absoluteY="395dp"-->
-<!--            tools:layout_editor_absoluteX="0dp"/>-->
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,10 +41,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:paddingBottom="8dp"
             app:adSize="BANNER"
             app:adUnitId="@string/admobUnitId"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
     </com.google.android.gms.ads.AdView>
 </androidx.constraintlayout.widget.ConstraintLayout>
