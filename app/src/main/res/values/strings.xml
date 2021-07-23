@@ -15,7 +15,7 @@
         In order to solve the puzzle:\n
         1. Examine code listing below and understand it\'s execution logic.\n
         2. Figure out what console input makes program finish without exception and fits final condition.\n
-        3. Put your answer in text field on the bottom and click to run.\n
+        3. Put your answer in text field on the bottom and click on the run button.\n
         4. Console output will show if answer is correct along with some debug information.\n
         5. In the tutorial answer is \"Tutorial\".
     </string>

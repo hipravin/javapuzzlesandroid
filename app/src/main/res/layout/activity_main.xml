@@ -41,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:paddingBottom="8dp"
             app:adSize="BANNER"
             app:adUnitId="@string/admobUnitId"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"

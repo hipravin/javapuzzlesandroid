@@ -23,7 +23,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     public static final String DB_NAME = "JAVA_PUZZLES_DB_01";
 
-    private boolean adEnabled = true;
+    private boolean adEnabled = false;
     private AdView admobBannerView;
     private PuzzleViewModel viewModel;
     private PuzzleDatabase puzzleDatabase;
@@ -33,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, initializationStatus -> {
-        });
-        admobBannerView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        admobBannerView.loadAd(adRequest);
+        if(adEnabled) {
+            MobileAds.initialize(this, initializationStatus -> {
+            });
+            admobBannerView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            admobBannerView.loadAd(adRequest);
+        }
 
         puzzleDatabase = Room.databaseBuilder(getApplicationContext(),
                 PuzzleDatabase.class, DB_NAME).build();
